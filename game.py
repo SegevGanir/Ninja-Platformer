@@ -28,14 +28,15 @@ class Game:
         while True:
             self.screen.fill((14, 219, 249))
 
-            self.img_pos[1] += (self.movement[1] - self.movement[0]) * 5
-            self.screen.blit(self.img, self.img_pos)
-
             img_r = pygame.Rect(self.img_pos[0], self.img_pos[1], self.img.get_width(), self.img.get_height())
             if img_r.colliderect(self.collision_area):
                 pygame.draw.rect(self.screen, (0, 100, 255), self.collision_area)
             else:
                 pygame.draw.rect(self.screen, (0, 50, 255), self.collision_area)
+ 
+            self.img_pos[1] += (self.movement[1] - self.movement[0]) * 5
+            self.screen.blit(self.img, self.img_pos)
+
 
 
             for event in pygame.event.get():
