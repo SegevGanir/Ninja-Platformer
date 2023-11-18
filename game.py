@@ -13,7 +13,8 @@ class Game:
     pygame.display.set_icon(icon)
 
     pygame.display.set_caption('ninja game')
-    self.screen = pygame.display.set_mode((640, 480))
+    self.screen = pygame.display.set_mode((1280, 960))
+    self.display = pygame.Surface((640, 480))
 
     self.clock = pygame.time.Clock()
     
@@ -27,10 +28,10 @@ class Game:
 
   def run(self):
     while True:
-      self.screen.fill((14, 219, 249))
+      self.display.fill((14, 219, 249))
 
       self.player.update((self.movement[1] - self.movement[0], 0))
-      self.player.render(self.screen)
+      self.player.render(self.display)
 
       for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -47,6 +48,7 @@ class Game:
           if event.key == pygame.K_RIGHT:
             self.movement[1] = False
 
+      self.screen.blit(pygame.transform.scale(self.display, self.screen.get_size()),(0, 0))
       pygame.display.update()
       self.clock.tick(60)
 
